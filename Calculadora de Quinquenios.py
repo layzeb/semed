@@ -1,9 +1,3 @@
-# programa que recebe do usuario data de admissao, anos em que teve faltas/licencas e calcula quantos meses de
-# licenca o servidor tem direito versao 2.2 update da v2.0: simplificação lógica da função com_imped() update da
-# v2.1: inserção de nome e dados do servidor update da v2.1.2: função impressão de relatório; simplificação na
-# exibição de variaveis Desenvolvido por Layze Brandão - 2017-03-25 comentários feitos acima das linhas a que fazem
-# referência
-
 import time
 
 # uso do metodo time.strftime para capturar o ano atual com 04 digitos
