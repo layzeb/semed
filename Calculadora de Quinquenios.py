@@ -1,47 +1,47 @@
-import time
+from time import strftime
 
 # uso do metodo time.strftime para capturar o ano atual com 04 digitos
-ano_atual = int(time.strftime("%Y"))
+ano_atual = int(strftime("%Y"))
 # inicialização do ano de admissao
-adm = total =  0
+adm = total = 0
 nome = mat = ''
 
 
 def menu():
     """Função que estabelece o menu inicial do programa."""
 
-    print("\t\tCALCULADORA DE QUINQUENIOS - LICENCA PREMIO v2.2.1 BETA\n\n")
+    print("\t\tCALCULADORA DE QUINQUENIOS - LICENCA PREMIO v2.1.4 BETA\n\n")
     print(
-        "Este programa foi desenvolvido para calcular quantos quinquenios de licenca premio o servidor da SEMED/Sao "
-        "Luis tem direito.\n")
-    execucao()  # chamada da função execucao()
+        "Este programa foi desenvolvido para calcular quantos quinquenios de licenca premio o servidor da SEMED/Sao Luis tem direito.\n")
+    execucao()
     relatorio()
 
 
 def execucao():
     """Função que solicita admissao do servidor e retorna a quantidade de quinquenios disponiveis para análise."""
 
-    # chamada das variaveis globais de ano_atual e adm para serem usadas dentro da definição da função
+    # chamada das variaveis globais para serem usadas dentro da definição da função
     global ano_atual, adm, nome, mat
 
     nome = input("Nome do servidor: ")
     mat = input("Matricula: ")
 
     # solicita ano de admissao e armazena na variavel adm
-    adm = int(input("\nDigite o ano de admissao com 04 digitos e aperte ENTER [ex: 1988]: \n"))
-
-    # checa se o ano de admissao é válido
-    if adm > ano_atual:
-        print("ERRO! Admissao posterior ao ano atual. Tente novamente.\n")
-        adm = int(input("Digite o ano de admissao com 04 digitos e aperte ENTER [ex: 1988]: \n"))
+    while True:
+        adm = int(input("\nDigite o ano de admissao com 04 digitos e aperte ENTER [ex: 1988]: \n"))
+        # checa se o ano de admissao é válido
+        if adm > ano_atual:
+            print("ERRO! Admissao posterior ao ano atual. Tente novamente.\n")
+            continue
+        else:
+            break
 
     # iteração sobre as hipoteses de análise
     while True:
 
         # solicita se o servidor possui algum impedimento e armazena na variavel faltas_lic
-        faltas_lic = input(
-            "O servidor possui faltas injustificadas, licencas para tratar de interesse particular ou acompanhar "
-            "familiares? Digite 's' para 'SIM' ou 'n' para 'NAO' e aperte ENTER: \n")
+        faltas_lic = input("O servidor possui faltas injustificadas, licencas para tratar de interesse particular ou acompanhar familiares? \
+Digite 's' para 'SIM' ou 'n' para 'NAO' e aperte ENTER: \n")
         faltas_lic = faltas_lic.lower()
         # checa se o usuario optou por 'sim', executa a função com_imped e interrompe o laço
         if faltas_lic == "s":
@@ -60,8 +60,8 @@ def execucao():
 
 
 def sem_imped():
-    """Função que calcula os quinquenios disponiveis para licenca de um servidor sem impedimentos (faltas 
-    injustificadas, licencas paratratar de interesse particular ou acompanhar familiares). """
+    """Função que calcula os quinquenios disponiveis \
+para licenca de um servidor sem impedimentos (faltas injustificadas, licencas paratratar de interesse particular ou acompanhar familiares)."""
 
     global ano_atual, adm, total
 
@@ -70,16 +70,15 @@ def sem_imped():
 
     # recebe a quantidade de quinquenios tirados pelo servidor
     lic_tirada = int(input(
-        "Digite quantos quinquenios o servidor ja tirou. Se o servidor nunca usufruiu de Licenca Premio, digite 0: "
-        "\n"))
+        "Digite quantos quinquenios o servidor ja tirou. Se o servidor nunca usufruiu de Licenca Premio, digite 0: \n"))
 
     # checa se a quantidade de licencas tiradas é maior do que as disponiveis
     if lic_tirada <= quinq:
         # calcula o total disponivel e mostra ao usuario
         total = quinq - lic_tirada
-        print("O servidor tem direito a", total, "quinquenio(s) = ", total * 3, "meses.")
+        print("O servidor tem direito a {} quinquenio(s) = {} meses".format(total, total * 3))
     else:
-        print("ERRO! O servidor ainda não completou", lic_tirada, "quinquenios, tente novamente.")
+        print("ERRO! O servidor ainda não completou {} quinquenios, tente novamente.".format(lic_tirada))
 
 
 def com_imped():
@@ -92,10 +91,9 @@ def com_imped():
     for i in range(adm, ano_atual + 1):
         anos.append(i)
 
-    print(
-        "Digite o ano em que o servidor possui falta, licenca sem vencimento ou licenca para acompanhar familiares, "
-        "UM POR VEZ, e aperte ENTER.\nCaso a licenca seja maior que um ano, colocar todos os anos de afastamento, "
-        "sempre UM POR VEZ e aperte ENTER.\nPara parar de adicionar anos, digite SAIR e aperte ENTER\n")
+    print("Digite o ano em que o servidor possui falta, licenca sem vencimento ou licenca para acompanhar familiares, UM POR VEZ, e aperte ENTER.\n\
+Caso a licenca seja maior que um ano, colocar todos os anos de afastamento, sempre UM POR VEZ e aperte ENTER.\n\
+Para parar de adicionar anos, digite SAIR e aperte ENTER\n")
 
     while True:
 
@@ -128,25 +126,25 @@ def com_imped():
     qt_anos = len(anos) - 1
     quinquenios = qt_anos // 5
     qt_premio = int(input(
-        "Digite quantos quinquenios o servidor ja tirou. Se o servidor nunca usufruiu de Licenca Premio, digite 0 e "
-        "aperte ENTER: \n"))
+        "Digite quantos quinquenios o servidor ja tirou. Se o servidor nunca usufruiu de Licenca Premio, digite 0 e aperte ENTER: \n"))
 
     # checa se a quantidade de licencas tiradas é maior do que as disponiveis
     if qt_premio <= quinquenios:
         total = (quinquenios - qt_premio)
-        print("O servidor tem direito a", total, "quinquenio(s) = ", total * 3, "meses.")
+        print("O servidor tem direito a {} quinquenio(s) = {} meses.".format(total, total * 3))
     else:
-        print("ERRO! O servidor ainda não completou", qt_premio, "quinquenios, tente novamente.")
+        print("ERRO! O servidor ainda não completou {} quinquenios, tente novamente.".format(qt_premio))
 
 
 def relatorio():
     """Função que irá gerar um relatorio da consulta realizada pronto para impressão."""
-    global nome, total, mat
+    global nome, mat, total
 
     arq_rel = open("relatorio.txt", 'w')
-    arq_rel.write("Nome do servidor: " + nome + '\n')
-    arq_rel.write("Matricula: " + mat + '\n')
-    arq_rel.write("Quantidade de quinquenios a serem usufruidos: " + str(total) + '\n')
+    arq_rel.write("Nome do servidor: {} \n\n".format(nome))
+    arq_rel.write("Matrícula: {}\n\n".format(mat))
+    arq_rel.write("Quantidade de quinquenios a serem usufruidos: {}\n\n".format(total))
+    arq_rel.write("Quantidade de quinquênios correspondente a {} meses\n".format(total * 3))
     arq_rel.close()
 
 
