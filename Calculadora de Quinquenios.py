@@ -9,9 +9,10 @@ nome = mat = ''
 def menu():
     """Função que estabelece o menu inicial do programa."""
 
-    print("\t   CALCULADORA DE QUINQUÊNIOS - LICENÇA PRÊMIO v3.0 BETA\n\n")
+    print("\t   CALCULADORA DE QUINQUÊNIOS - LICENÇA PRÊMIO v3.1 BETA\n\n")
     print("Calcule quantos quinquênios de licenca prêmio o servidor da SEMED tem direito.\n")
     execucao()
+    encerramento()
     relatorio()
 
 
@@ -152,7 +153,11 @@ Para parar de adicionar anos, digite SAIR e aperte ENTER\n")
     except ValueError:
         print("Você usou um valor não-numérico. Tente novamente.\n")
 
-
+def encerramento():
+    fim = input('Pressione qualquer tecla para sair...')
+    pass
+        
+        
 def relatorio():
     """Função que irá gerar um relatório da consulta realizada pronto para impressão."""
 
