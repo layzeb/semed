@@ -9,7 +9,7 @@ nome = mat = ''
 def menu():
     """Função que estabelece o menu inicial do programa."""
 
-    print("\t   CALCULADORA DE QUINQUÊNIOS - LICENÇA PRÊMIO v3.1 BETA\n\n")
+    print("\t   CALCULADORA DE QUINQUÊNIOS - LICENÇA PRÊMIO v3.2 BETA\n\n")
     print("Calcule quantos quinquênios de licenca prêmio o servidor da SEMED tem direito.\n")
     execucao()
     encerramento()
@@ -22,24 +22,24 @@ def execucao():
     #chamada das variáveis globais para serem usadas dentro da definição da função
     global ano_atual, adm, nome, mat
 
-    nome = input("Nome do servidor: ")
-    mat = input("Matrícula: ")
+    #uso do método strip() serve para retirar espaços em branco antes e depois do conteúdo digitado
+    nome = input("Nome do servidor: ").strip()
+    mat = input("Matrícula: ").strip()
 
     while True:
 
         #bloco de tratamento de erros para evitar que o usuário digite um tipo diferente de dado para 'adm'
         try:
-            adm = int(input("\nDigite o ano de admissão com 04 dígitos e aperte ENTER [ex: 1988]: \n"))
+
+            adm = int((input("\nDigite o ano de admissão com 04 dígitos e aperte ENTER [ex: 1988]: \n")))
 
             #verifica se o tamanho do ano digitado corresponde ao solicitado
             if len(str(adm)) != 4:
                 print('O ano precisa ter 04 dígitos. Exemplo: 2010 ')
-                continue
             else:
                 #verifica se o ano digitado é válido
                 if adm > ano_atual:
                     print("Admissão posterior ao ano atual. Tente novamente.")
-                    continue
                 else:
                     break
 
@@ -52,7 +52,7 @@ def execucao():
         # solicita se o servidor possui algum impedimento e armazena na variável faltas_lic
         #usa o método .lower() pra transformar o conteúdo da variável pra minúsculo
         faltas_lic = input("O servidor possui faltas injustificadas, licenças para tratar de interesse particular ou acompanhar familiares? \
-Digite 's' para 'SIM' ou 'n' para 'NÃO' e aperte ENTER: \n").lower()
+Digite 's' para 'SIM' ou 'n' para 'NÃO' e aperte ENTER: \n").lower().strip()
 
         # checa se o usuário optou por 'sim', executa a função com_imped e interrompe o laço
         if faltas_lic == "s":
@@ -65,7 +65,6 @@ Digite 's' para 'SIM' ou 'n' para 'NÃO' e aperte ENTER: \n").lower()
         else:
             # reinicia o loop, caso a opção escolhida seja diferente das acima
             print("Opção inválida. Digite 's' para 'SIM' ou 'n' para 'NÃO':\n")
-            continue
 
 
 def sem_imped():
@@ -89,9 +88,10 @@ def sem_imped():
             if lic_tirada <= quinq:
                 total = quinq - lic_tirada
                 print("O servidor tem direito a {} quinquenio(s) = {} meses".format(total, total * 3))
+                break
             else:
                 print("O servidor ainda não completou {} quinquenios, tente novamente.".format(lic_tirada))
-            break
+
         except ValueError:
             print("Você usou um valor não-numérico. Tente novamente.")
 
@@ -112,7 +112,7 @@ Para parar de adicionar anos, digite SAIR e aperte ENTER\n")
     while True:
 
         # solicita um ano em que há impedimento
-        ano_imp = input().lower()
+        ano_imp = input().lower().strip()
         # checa se o usuário digitou 'sair' e sai do loop
         if ano_imp == 'sair':
             break
@@ -166,9 +166,9 @@ def relatorio():
     # cria um arquivo .txt chamado relatório, com parâmetro de escrita, no mesmo local do arquivo .py
     # escreve no arquivo e fecha
     arq_rel = open("relatorio.txt", 'w')
-    arq_rel.write("Nome do servidor: {} \n\n".format(nome))
+    arq_rel.write("Nome do servidor: {}\n\n".format(nome.capitalize()))
     arq_rel.write("Matrícula: {}\n\n".format(mat))
-    arq_rel.write("Quantidade de quinquenios a serem usufruidos: {}\n\n".format(total))
+    arq_rel.write("Quantidade de quinquênios a serem usufruídos: {}\n\n".format(total))
     arq_rel.write("Quantidade de quinquênios correspondente a {} meses\n".format(total * 3))
     arq_rel.close()
 
