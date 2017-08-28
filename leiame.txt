@@ -1,9 +1,0 @@
-*******CALCULADORA DE QUINQUENIOS*********
-
-Programa que recebe do usuario data de admissao, anos em que teve faltas/licencas e calcula quantos meses de 
-licenca o servidor tem direito.
-
-
-Desenvolvido por Layze Brandao - 2017-03-25 v2.1.4
-
-projeto em andamento
